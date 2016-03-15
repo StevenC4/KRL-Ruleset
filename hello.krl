@@ -17,7 +17,7 @@ A first ruleset for the Quickstart
     };
  
   }
-  rule hello_world {
+  rule hello_name {
     select when echo hello
     pre{
       name = event:attr("name").klog("our passed in Name: ");
@@ -30,5 +30,16 @@ A first ruleset for the Quickstart
       log ("LOG says Hello " + name);
     }
   }
- 
+
+  rule hello_world is active {
+    select when echo hello
+    send_directive("say") with
+      something = "Hello World";
+  }
+   
+  rule echo is active {
+    select when echo message input "(.*)" setting(m)
+    send_directive("say") with
+      something = m;
+  }
 }
