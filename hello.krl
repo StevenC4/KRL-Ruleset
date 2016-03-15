@@ -18,7 +18,7 @@ A first ruleset for the Quickstart
  
   }
   rule hello_name {
-    select when echo hello name "(.*)"
+    select when echo helloname
     pre{
       name = event:attr("name").klog("our passed in Name: ");
     }
