@@ -11,6 +11,7 @@ Track trips ruleset
  
   }
   global{
+
     longest_length = 0;
   }
 
@@ -19,7 +20,7 @@ Track trips ruleset
     pre{
       test = event:attr("mileage")
     }
-    {
+    if (test > longest_length) then {
       send_directive("trip") with
         trip_length = test;
     }
