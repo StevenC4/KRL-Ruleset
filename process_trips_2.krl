@@ -25,7 +25,7 @@ Track trips ruleset
     }
     {
       send_directive("trip") with
-        trip_length = length and longest_length = longest_length
+        trip_length = length
     }
     always { 
       set ent:longest_length length if (length > longest_length);
