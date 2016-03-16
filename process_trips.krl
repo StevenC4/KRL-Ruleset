@@ -12,7 +12,7 @@ Track trips ruleset
   }
 
   rule process_trip is active {
-    select when car new_trip mileage "(.*)" setting(length)
+    select when explicit trip_processed mileage "(.*)" setting(length)
     send_directive("trip") with
       trip_length = length;
   }
