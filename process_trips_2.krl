@@ -12,23 +12,23 @@ Track trips ruleset
   }
   
   global{
-
-    setLongestLength = function(length) {
-      longest_length = length;
-      {}
+    getLongestLength = function() {
+      length = ent:longest_length || 0
+      length
     }
-
   }
 
   rule process_trip is active {
     select when explicit trip_processed mileage re#(\d+)# setting(length)
     pre{
-      test = event:attr("mileage").klog("Storing mileage: ");
+      longest_length = getLongestLength()
     }
-    if (test > longest_length) then {
-      setLongestLength(test); 
+    {
       send_directive("trip") with
-        trip_length = test;
+        trip_length = length and longest_length = getLongestLength()
+    }
+    always { 
+      set ent:longest_length test if (length > longest_length);
     }
   }
 }
