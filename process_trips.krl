@@ -14,6 +14,6 @@ Track trips ruleset
   rule process_trip is active {
     select when car new_trip mileage "(.*)" setting(length)
     send_directive("trip") with
-      trip_length = "Hello";
+      trip_length = length;
   }
 }
