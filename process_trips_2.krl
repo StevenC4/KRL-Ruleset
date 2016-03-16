@@ -10,12 +10,14 @@ Track trips ruleset
     provides process_trip
  
   }
+  
   global{
 
     longest_length = 0;
 
     set_longest_length = function(length) {
       longest_length = length;
+      {}
     }
 
   }
@@ -23,7 +25,7 @@ Track trips ruleset
   rule process_trip is active {
     select when explicit trip_processed mileage re#(\d+)# setting(length)
     pre{
-      test = event:attr("mileage");
+      test = event:attr("mileage").klog("Storing mileage");
     }
     if (test > longest_length) then {
       set_longest_length(test); 
