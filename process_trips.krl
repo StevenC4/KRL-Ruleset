@@ -1,8 +1,8 @@
-ruleset process_trips {
+ruleset track_trips {
   meta {
     name "Hello World"
     description <<
-Process trips ruleset
+Track trips ruleset
 >>
     author "Steven Carroll"
     logging on
