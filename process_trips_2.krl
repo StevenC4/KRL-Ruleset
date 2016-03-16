@@ -1,6 +1,6 @@
 ruleset track_trips_2 {
   meta {
-    name "Hello World"
+    name "Track Trips 2"
     description <<
 Track trips ruleset
 >>
