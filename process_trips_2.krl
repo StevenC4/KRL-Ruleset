@@ -19,6 +19,6 @@ Track trips ruleset
     if (length > longest_length) then
       longest_length(length)
     send_directive("trip") with
-      trip_length = length;
+      trip_length = longest_length;
   }
 }
