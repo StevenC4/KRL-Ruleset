@@ -7,7 +7,7 @@ Track trips ruleset
     author "Steven Carroll"
     logging on
     sharing on
-    provides process_trip
+    provides process_trip, set_longest_length
  
   }
   
