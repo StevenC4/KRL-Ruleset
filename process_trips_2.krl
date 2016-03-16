@@ -13,14 +13,20 @@ Track trips ruleset
   global{
 
     longest_length = 0;
+
+    set_longest_length = function(length) {
+      longest_length = length;
+    }
+
   }
 
   rule process_trip is active {
     select when explicit trip_processed mileage re#(\d+)# setting(length)
     pre{
-      test = event:attr("mileage")
+      test = event:attr("mileage");
     }
     if (test > longest_length) then {
+      set_longest_length(test); 
       send_directive("trip") with
         trip_length = test;
     }
