@@ -19,6 +19,12 @@ Track trips ruleset
   }
 
   rule process_trip is active {
+    select when car trip mileage re#(\d+)# setting(length)
+    send_directive("trip") with
+        trip_length = length
+  }
+
+  rule find_long_trip is active {
     select when explicit trip_processed mileage re#(\d+)# setting(length)
     pre{
       longest_length = getLongestLength();
