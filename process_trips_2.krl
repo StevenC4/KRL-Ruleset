@@ -21,7 +21,7 @@ Track trips ruleset
   rule process_trip is active {
     select when explicit trip_processed mileage re#(\d+)# setting(length)
     pre{
-      stored_longest_length = ent:longest_length || 0;
+      stored_longest_length = ent:longest_length;
     }
     {
       send_directive("trip") with
