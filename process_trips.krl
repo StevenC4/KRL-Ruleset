@@ -12,8 +12,8 @@ Track trips ruleset
   }
 
   rule process_trip is active {
-    select when car trip mileage "(.*)" setting(length)
+    select when echo message mileage "(.*)" setting(length)
     send_directive("trip") with
-      trip_length = length;
+      trip_length = "Hello";
   }
 }
