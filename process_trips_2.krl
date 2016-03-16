@@ -16,7 +16,7 @@ Track trips ruleset
     longest_length = 0;
 
     set_longest_length = function(length) {
-      longest_length = length;
+      longest_length = length.klog("Updating the longest length: ");
       {}
     }
 
@@ -25,7 +25,7 @@ Track trips ruleset
   rule process_trip is active {
     select when explicit trip_processed mileage re#(\d+)# setting(length)
     pre{
-      test = event:attr("mileage").klog("Storing mileage");
+      test = event:attr("mileage").klog("Storing mileage: ");
     }
     if (test > longest_length) then {
       set_longest_length(test); 
