@@ -15,9 +15,9 @@ Track trips ruleset
   }
 
   rule process_trip is active {
-    select when explicit trip_processed where mileage "(.*)" > longest_length setting(length)
-    longest_length = length;
+    select when explicit trip_processed where mileage > longest_length setting(length) 
+    longest_length(attr:length)
     send_directive("trip") with
-      trip_length = length;
+      trip_length = attr:length;
   }
 }
