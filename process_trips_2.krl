@@ -28,7 +28,7 @@ Track trips ruleset
         trip_length = length and longest_length = stored_longest_length
     }
     always { 
-      set ent:longest_length test if (length > stored_longest_length);
+      set ent:longest_length length if (length > stored_longest_length);
     }
   }
 }
