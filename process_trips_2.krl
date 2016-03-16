@@ -13,8 +13,6 @@ Track trips ruleset
   
   global{
 
-    longest_length = 0;
-
     set_longest_length = function(length) {
       longest_length = length.klog("Updating the longest length: ");
       {}
