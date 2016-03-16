@@ -10,6 +10,9 @@ Track trips ruleset
     provides process_trip
  
   }
+  global{
+    longest_length = 0;
+  }
 
   rule process_trip is active {
     select when explicit trip_processed mileage "(.*)" setting(length)
