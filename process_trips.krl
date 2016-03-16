@@ -12,7 +12,7 @@ Track trips ruleset
   }
 
   rule process_trip is active {
-    select when explicit trip_processed mileage "[\s\w]*(\d*)[\s\w]*" setting(length)
+    select when explicit trip_processed mileage "(\d*)" setting(length)
     send_directive("trip") with
       trip_length = length;
   }
