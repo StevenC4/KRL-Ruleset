@@ -17,7 +17,7 @@ Track trips ruleset
   rule process_trip is active {
     select when explicit trip_processed mileage re#(\d+)# setting(length)
     pre{
-      test = mileage
+      test = event:attr("mileage")
     }
     {
       send_directive("trip") with
