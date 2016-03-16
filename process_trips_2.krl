@@ -13,7 +13,7 @@ Track trips ruleset
   
   global{
     getLongestLength = function() {
-      length = ent:longest_length || 0
+      length = ent:longest_length
       length
     }
   }
@@ -21,14 +21,14 @@ Track trips ruleset
   rule process_trip is active {
     select when explicit trip_processed mileage re#(\d+)# setting(length)
     pre{
-      stored_longest_length = ent:longest_length;
+      longest_length = getLongestLength();
     }
     {
       send_directive("trip") with
-        trip_length = stored_longest_length
+        trip_length = length and longest_length = longest_length
     }
     always { 
-      set ent:longest_length length if (length > stored_longest_length);
+      set ent:longest_length length if (length > longest_length);
     }
   }
 }
