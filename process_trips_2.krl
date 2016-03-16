@@ -13,7 +13,7 @@ Track trips ruleset
   
   global{
 
-    set_longest_length = function(length) {
+    setLongestLength = function(length) {
       longest_length = length.klog("Updating the longest length: ");
       {}
     }
@@ -26,7 +26,7 @@ Track trips ruleset
       test = event:attr("mileage").klog("Storing mileage: ");
     }
     if (test > longest_length) then {
-      set_longest_length(test); 
+      setLongestLength(test); 
       send_directive("trip") with
         trip_length = test;
     }
