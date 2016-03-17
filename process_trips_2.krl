@@ -33,7 +33,6 @@ Track trips ruleset
     }
     always { 
       set ent:longest_length length.klog("New longest trip length: ") if (length > longest_length);
-      set ent:longest_length 0 if (true);
     }
   }
 }
