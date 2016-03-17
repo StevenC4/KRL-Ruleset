@@ -71,7 +71,7 @@ Trip store ruleset
       send_directive("trip") with
         trips = map.encode({"canonical": true, "pretty": true})
     }
-  } 
+  }
 
   rule get_long_trips is active {
     select when explicit fetch_long_trips
