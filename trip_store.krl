@@ -22,7 +22,7 @@ Trip store ruleset
     }
 
     short_trips = function() {
-      trip = ent:trip.filter(function(k,v){not ent:long_trip.values(k)}) || {}
+      trip = ent:trip.filter(function(k,v){not ent:long_trip.keys().has(k)}) || {}
       trip
     } 
   }
@@ -32,7 +32,7 @@ Trip store ruleset
     pre {
       timestamp = time:now();
       map = trips().put([timestamp], length);
-      shortMap = map.filter(function(k,v){not not ent:long_trip.values(k)});
+      shortMap = map.filter(function(k,v){not ent:long_trip.keys().has(k)});
     }
     {
       send_directive("trip") with
