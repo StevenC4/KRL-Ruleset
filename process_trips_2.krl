@@ -17,7 +17,7 @@ Track trips ruleset
 
   rule process_trip is active {
     select when car new_trip mileage re#(\d+)# setting(length)
-    always{  
+    always {  
       raise explicit event 'trip_processed'
         attributes event:attrs()
     }
@@ -25,18 +25,18 @@ Track trips ruleset
 
   rule find_long_trip is active {
     select when explicit trip_processed
-    pre{
+    pre {
       length = event:attr('mileage').klog("Mileage: ");
     }
-    if (length > long_trip) then{
+    if (length > long_trip) then {
       send_directive("Registering a long trip: " + length);
     }
-    fired{
+    fired {
       log "Is a long trip: " + length;
       raise explicit event 'found_long_trip'
         attributes event:attrs() if (length > long_trip);
     }
-    else{
+    else {
       log "Is a short trip: " + length;
     }
   }
