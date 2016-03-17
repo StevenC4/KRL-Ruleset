@@ -50,8 +50,7 @@ Trip store ruleset
     }
     always{
       log "Long trip processed: time=" + timestamp + " mileage=" + length;
-      set ent:long_trip{timestamp} length;
-      log "Long trips updated: " + long_trips().encode(); 
+      set ent:long_trip{timestamp} length; 
     }
   }
 
@@ -66,11 +65,11 @@ Trip store ruleset
   rule get_trips is active {
     select when explicit fetch_trips
     pre{
-      trips = trips();
+      map = trips();
     }
     {
       send_directive("trip") with
-        trips = trips.encode({"canonical": true, "pretty": true})
+        trips = map.encode({"canonical": true, "pretty": true})
     }
   } 
 
