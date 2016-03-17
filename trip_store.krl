@@ -12,17 +12,17 @@ Trip store ruleset
   
   global{
     trips = function() {
-      trip = ent:trip
+      trip = ent:trip || {}
       trip
     }
 
     long_trips = function() {
-      long_trip = ent:long_trip
+      long_trip = ent:long_trip || {}
       long_trip
     }
 
     short_trips = function() {
-      trip = ent:trip
+      trip = ent:trip || {}
       trip
     } 
   }
@@ -31,8 +31,10 @@ Trip store ruleset
     select when explicit trip_processed mileage re#(\d+)# setting(length)
     pre {
       timestamp = time:now();
+      tripMap = trip().put([timestamp], length);
     }
     always {
+      set ent:trip tripMap.klog("Updating map of trips: ");
       log "Trip processed: time=" + timestamp + " mileage=" + length; 
     }
   }
