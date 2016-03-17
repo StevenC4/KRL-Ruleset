@@ -36,7 +36,6 @@ Trip store ruleset
     always {
       set ent:trip tripMap;
       log "Trip processed: time=" + timestamp + " mileage=" + length;
-      log "Updated map of trips: " +  
     }
   }
 
