@@ -19,22 +19,24 @@ Track trips ruleset
   }
 
   rule process_trip is active {
-    select when car trip mileage re#(\d+)# setting(length)
-      raise explicit trip_processed 'foo'
-        with mileage = length;
+    select when car new_trip mileage re#(\d+)# setting(length)
+    always{  
+      raise explicit event 'trip_processed'
+        attributes event:attrs()
+    }
   }
 
   rule find_long_trip is active {
     select when explicit trip_processed mileage re#(\d+)# setting(length)
     pre{
-      longest_length = getLongestLength();
+      longest_length = getLongestLength().klog("Getting the current longest length: ");
     }
     {
       send_directive("trip") with
         trip_length = length
     }
     always { 
-      set ent:longest_length length if (length > longest_length);
+      set ent:longest_length length.klog("New entered length: ") if (length > longest_length);
     }
   }
 }
