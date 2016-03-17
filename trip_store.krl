@@ -8,7 +8,6 @@ Trip store ruleset
     logging on
     sharing on
     provides trips, long_trips, short_trips
- 
   }
   
   global{
@@ -24,31 +23,21 @@ Trip store ruleset
 
     short_trips = function() {
       trip = ent:trip
-      short_trip = trip.filter()
+      trip
     } 
   }
 
   rule collect_trips is active {
     select when explicit trip_processed mileage re#(\d+)# setting(length)
-    always{  
-      raise explicit event 'trip_processed'
-        attributes event:attrs()
+    always{
+      log "TRIP PROCESSED"
     }
   }
 
   rule collect_long_trips is active {
     select when explicit found_long_trip mileage re#(\d+)# setting(length)
-    always{  
-      raise explicit event 'trip_processed'
-        attributes event:attrs()
-    }
-  }
-
-  rule clear_trips is active {
-    select when car trip_reset
-    always{  
-      clear ent:trips
-      clear ent:long_trips
+    always{
+      log "LONG TRIP FOUND"
     }
   }
 }
