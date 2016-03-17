@@ -30,7 +30,7 @@ Track trips ruleset
     }
     always{
       log "Is a long trip" if (length > long_trip);  
-      raise explicit event 'tested'
+      raise explicit event 'test'
         attributes event:attrs();
     }
   }
