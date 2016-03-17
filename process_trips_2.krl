@@ -31,8 +31,12 @@ Track trips ruleset
     pre{
       longest_length = getLongestLength().klog("Getting the current longest trip length: ");
     }
+    {
+      send_directive("trip") with
+        trip_length = length
+    }
     always { 
-      set ent:longest_length length.klog("New longest trip length: ") if (length > longest_length);
+      set ent:longest_length length.klog("New longest trip: ") if (length > longest_length);
     }
   }
 }
