@@ -22,7 +22,7 @@ Trip store ruleset
     }
 
     short_trips = function() {
-      trip = ent:trip.filter(function(k,v){ent:long_trip.keys().has(k)}) || {}
+      trip = ent:trip.filter(function(k,v){not ent:long_trip.keys().has(k)}) || {}
       trip
     } 
   }
@@ -31,8 +31,6 @@ Trip store ruleset
     select when explicit trip_processed mileage re#(\d+)# setting(length)
     pre {
       timestamp = time:now();
-      map = trips().put([timestamp], length);
-      shortMap = map.filter(function(k,v){ent:long_trip.keys().has(k)});
     }
     {
       send_directive("trip") with
@@ -63,5 +61,38 @@ Trip store ruleset
       clear ent:trip;
       clear ent:long_trip;
     }
+  }
+
+  rule get_trips is active {
+    select when explicit fetch_trips
+    pre{
+      trips = trips();
+    }
+    {
+      send_directive("trip") with
+        trips = trips.encode({"canonical": true, "pretty": true})
+    }
   } 
+
+  rule get_long_trips is active {
+    select when explicit fetch_long_trips
+    pre{
+      long_trips = long_trips();
+    }
+    {
+      send_directive("trip") with
+        trips = trips.encode({"canonical": true, "pretty": true})
+    }
+  } 
+
+  rule get_short_trips is active {
+    select when explicit fetch_short_trips
+    pre{
+      short_trips = short_trips();
+    }
+    {
+      send_directive("trip") with
+        trips = trips.encode({"canonical": true, "pretty": true})
+    }
+  }   
 }
