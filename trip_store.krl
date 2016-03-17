@@ -36,8 +36,8 @@ Trip store ruleset
     }
     {
       send_directive("trip") with
-        trips = map.encode()
-        and short_trips = shortMap.encode();
+        trips = map.encode({"canonical": true, "pretty": true})
+        and short_trips = shortMap.encode({"canonical": true, "pretty": true});
     }
     always {
       log "Trip processed: time=" + timestamp + " mileage=" + length;
