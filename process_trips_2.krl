@@ -29,14 +29,10 @@ Track trips ruleset
   rule find_long_trip is active {
     select when explicit trip_processed mileage re#(\d+)# setting(length)
     pre{
-      longest_length = getLongestLength().klog("Getting the current longest length: ");
-    }
-    {
-      send_directive("trip") with
-        trip_length = length
+      longest_length = getLongestLength().klog("Getting the current longest trip length: ");
     }
     always { 
-      set ent:longest_length length.klog("New entered length: ") if (length > longest_length);
+      set ent:longest_length length.klog("New longest trip length: ") if (length > longest_length);
     }
   }
 }
