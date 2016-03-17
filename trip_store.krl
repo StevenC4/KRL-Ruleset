@@ -31,13 +31,11 @@ Trip store ruleset
     select when explicit trip_processed mileage re#(\d+)# setting(length)
     pre {
       timestamp = time:now();
-      tripMap = trip().put([timestamp], length);
-      mapString = tripMap.encode();
+      ent:trip.put([timestamp], length);
     }
     always {
-      set ent:trip tripMap;
       log "Trip processed: time=" + timestamp + " mileage=" + length;
-      log "Updated trip map: " + mapString;
+      log "Updated trip map: " + ent:trip.encode();
     }
   }
 
