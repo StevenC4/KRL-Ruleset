@@ -12,7 +12,7 @@ Trip store ruleset
   
   global{
     trips = function() {
-      trip = ent:trip 
+      trip = ent:trip || {}
       trip
     }
 
