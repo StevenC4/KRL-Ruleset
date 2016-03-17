@@ -34,8 +34,9 @@ Trip store ruleset
       tripMap = trip().put([timestamp], length);
     }
     always {
-      set ent:trip tripMap.klog("Updating map of trips: ");
-      log "Trip processed: time=" + timestamp + " mileage=" + length; 
+      set ent:trip tripMap;
+      log "Trip processed: time=" + timestamp + " mileage=" + length;
+      log "Updated map of trips: " +  
     }
   }
 
