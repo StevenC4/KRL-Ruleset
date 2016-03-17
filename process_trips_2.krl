@@ -30,15 +30,8 @@ Track trips ruleset
     }
     always{
       log "Is a long trip" if (length > long_trip);  
-      raise explicit event 'test'
+      raise explicit event 'found_long_trip'
         attributes event:attrs();
-    }
-  }
-
-  rule test_rule is active {
-    select when explicit test
-    always{
-      log "Here we go"
     }
   }
 }
