@@ -31,7 +31,7 @@ Trip store ruleset
     select when explicit trip_processed mileage re#(\d+)# setting(length)
     pre {
       timestamp = time:now();
-      map = {};
+      map = trips();
       map2 = map.put([timestamp], length);
       mapString = map2.encode();
     }
