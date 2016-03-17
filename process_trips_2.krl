@@ -31,7 +31,7 @@ Track trips ruleset
     always{
       log "Is a long trip" if (length > long_trip);  
       raise explicit event 'long_trip_found'
-        attributes event:attrs() if (length > long_trip);
+        attributes event:attrs();
     }
   }
 }
