@@ -29,7 +29,7 @@ Track trips ruleset
       length = event:attr('mileage').klog("Mileage: ");
     }
     fired{
-      log "HERE" if (length > 50);  
+      log "HERE" if (true);  
       raise explicit event 'long_trip_found'
         attributes event:attrs()
     }
