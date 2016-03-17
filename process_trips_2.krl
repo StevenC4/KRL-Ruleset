@@ -29,9 +29,10 @@ Track trips ruleset
       length = event:attr('mileage').klog("Mileage: ");
     }
     if (length > long_trip) then{
-      log "Is a long trip";
+      send_directive("Registering a long tri: " + length);
     }
     fired{
+      log "Is a long trip";
       raise explicit event 'found_long_trip'
         attributes event:attrs() if (length > long_trip);
     }
