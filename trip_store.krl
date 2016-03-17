@@ -11,8 +11,6 @@ Trip store ruleset
   }
   
   global{
-    trip = {};
-
     trips = function() {
       trip = ent:trip 
       trip
@@ -24,7 +22,7 @@ Trip store ruleset
     }
 
     short_trips = function() {
-      trip = ent:trip || {}
+      trip = ent:trip
       trip
     } 
   }
