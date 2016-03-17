@@ -76,22 +76,22 @@ Trip store ruleset
   rule get_long_trips is active {
     select when explicit fetch_long_trips
     pre{
-      long_trips = long_trips();
+      map = long_trips();
     }
     {
       send_directive("trip") with
-        trips = trips.encode({"canonical": true, "pretty": true})
+        trips = map.encode({"canonical": true, "pretty": true})
     }
   } 
 
   rule get_short_trips is active {
     select when explicit fetch_short_trips
     pre{
-      short_trips = short_trips();
+      map = short_trips();
     }
     {
       send_directive("trip") with
-        trips = trips.encode({"canonical": true, "pretty": true})
+        trips = map.encode({"canonical": true, "pretty": true})
     }
   }   
 }
