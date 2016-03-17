@@ -22,7 +22,7 @@ Trip store ruleset
     }
 
     short_trips = function() {
-      trip = ent:trip.filter(function(k,v){not ent:long_trip.has(k)}) || {}
+      trip = ent:trip.filter(function(k,v){ent:long_trip.has(k)}) || {}
       trip
     } 
   }
