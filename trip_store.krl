@@ -29,15 +29,21 @@ Trip store ruleset
 
   rule collect_trips is active {
     select when explicit trip_processed mileage re#(\d+)# setting(length)
-    always{
-      log "TRIP PROCESSED"
+    pre {
+      timestamp = time:now();
+    }
+    always {
+      log "TRIP PROCESSED: time=" + timestamp; 
     }
   }
 
   rule collect_long_trips is active {
     select when explicit found_long_trip mileage re#(\d+)# setting(length)
+    pre {
+      timestamp = time:now();
+    }
     always{
-      log "LONG TRIP FOUND"
+      log "LONG TRIP PROCESSED: time=" + timestamp;
     }
   }
 
