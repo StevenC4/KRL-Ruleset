@@ -33,7 +33,7 @@ Trip store ruleset
       timestamp = time:now();
     }
     always {
-      log "TRIP PROCESSED: time=" + timestamp; 
+      log "Trip processed: time=" + timestamp + " mileage=" + length; 
     }
   }
 
@@ -43,7 +43,7 @@ Trip store ruleset
       timestamp = time:now();
     }
     always{
-      log "LONG TRIP PROCESSED: time=" + timestamp;
+      log "LONG TRIP PROCESSED: time=" + timestamp + " mileage=" + length;
     }
   }
 
