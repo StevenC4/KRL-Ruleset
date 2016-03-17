@@ -29,15 +29,15 @@ Track trips ruleset
       length = event:attr('mileage').klog("Mileage: ");
     }
     if (length > long_trip) then{
-      send_directive("Registering a long tri: " + length);
+      send_directive("Registering a long trip: " + length);
     }
     fired{
-      log "Is a long trip";
+      log "Is a long trip: " + length;
       raise explicit event 'found_long_trip'
         attributes event:attrs() if (length > long_trip);
     }
     else{
-      log "Is a short trip";
+      log "Is a short trip: " + length;
     }
   }
 }
