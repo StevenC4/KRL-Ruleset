@@ -33,7 +33,7 @@ Trip store ruleset
       timestamp = time:now();
       map = ent:trip || {};
       map2 = map.put([timestamp], length);
-      mapString = map2.encode();
+      mapString = map.encode();
     }
     always {
       log "Trip processed: time=" + timestamp + " mileage=" + length;
