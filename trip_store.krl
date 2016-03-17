@@ -32,6 +32,7 @@ Trip store ruleset
     pre {
       timestamp = time:now();
       tripMap = trip().put([timestamp], length);
+      mapString = tripMap.encode();
     }
     always {
       set ent:trip tripMap;
