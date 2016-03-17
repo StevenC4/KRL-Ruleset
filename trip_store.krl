@@ -7,19 +7,48 @@ Trip store ruleset
     author "Steven Carroll"
     logging on
     sharing on
-    provides collect_trips
+    provides trips, long_trips, short_trips
  
   }
   
   global{
-    
+    trips = function() {
+      trip = ent:trip
+      trip
+    }
+
+    long_trips = function() {
+      long_trip = ent:long_trip
+      long_trip
+    }
+
+    short_trips = function() {
+      trip = ent:trip
+      short_trip = trip.filter()
+    } 
   }
 
   rule collect_trips is active {
-    select when car new_trip mileage re#(\d+)# setting(length)
+    select when explicit trip_processed mileage re#(\d+)# setting(length)
     always{  
       raise explicit event 'trip_processed'
         attributes event:attrs()
+    }
+  }
+
+  rule collect_long_trips is active {
+    select when explicit found_long_trip mileage re#(\d+)# setting(length)
+    always{  
+      raise explicit event 'trip_processed'
+        attributes event:attrs()
+    }
+  }
+
+  rule clear_trips is active {
+    select when car trip_reset
+    always{  
+      clear ent:trips
+      clear ent:long_trips
     }
   }
 }
