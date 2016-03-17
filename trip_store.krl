@@ -12,12 +12,12 @@ Trip store ruleset
   
   global{
     trips = function() {
-      trip = ent:trip || {}
+      trip = ent:trip
       trip
     }
 
     long_trips = function() {
-      long_trip = ent:long_trip || {}
+      long_trip = ent:long_trip
       long_trip
     }
 
