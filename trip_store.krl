@@ -40,4 +40,12 @@ Trip store ruleset
       log "LONG TRIP FOUND"
     }
   }
+
+  rule clear_trips is active {
+    select when car trip_reset
+    always {
+      clear ent:trip;
+      clear ent:long_trip;
+    }
+  } 
 }
