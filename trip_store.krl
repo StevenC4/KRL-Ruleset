@@ -32,11 +32,12 @@ Trip store ruleset
     pre {
       timestamp = time:now();
       tripMap = trip().put([timestamp], length);
-      mapString = tripMap.encode().klog("Updated trip map: ");
+      mapString = tripMap.encode();
     }
     always {
       set ent:trip tripMap;
       log "Trip processed: time=" + timestamp + " mileage=" + length;
+      log "Updated trip map: " + mapString;
     }
   }
 
