@@ -28,10 +28,15 @@ Track trips ruleset
     pre{
       length = event:attr('mileage').klog("Mileage: ");
     }
-    always{
-      log "Is a long trip" if (length > long_trip);  
+    if (length > long_trip) then{
+      log "Is a long trip";
+    }
+    fired{
       raise explicit event 'found_long_trip'
-        attributes event:attrs();
+        attributes event:attrs() if (length > long_trip);
+    }
+    else{
+      log "Is a short trip";
     }
   }
 }
