@@ -38,6 +38,8 @@ Trip store ruleset
     always {
       log "Trip processed: time=" + timestamp + " mileage=" + length;
       log "Updated trip map: " + mapString;
+      set ent:trip{timestamp} length;
+      log "Updated: " + ent:trip.encode();
     }
   }
 
