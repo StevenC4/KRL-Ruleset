@@ -31,13 +31,17 @@ Trip store ruleset
     select when explicit trip_processed mileage re#(\d+)# setting(length)
     pre {
       timestamp = time:now();
+      map = trips().put([timestamp], length);
+      shortMap = map.filter(function(k,v){not ent:long_trip.has(k)});
+    }
+    {
+      send_directive("trip") with
+        trips = map.encode()
+        and short_trips = shortMap.encode();
     }
     always {
       log "Trip processed: time=" + timestamp + " mileage=" + length;
-      log "Updated trip map: " + mapString;
       set ent:trip{timestamp} length;
-      log "Trips updated: " + trips().encode();
-      log "Short trips updated: " + short_trips().encode();
     }
   }
 
