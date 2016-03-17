@@ -24,12 +24,12 @@ Track trips ruleset
   }
 
   rule find_long_trip is active {
-    select when explicit trip_processed where mileage.extract(re#\d+#).head() > 50
+    select when explicit trip_processed
     pre{
       length = event:attr('mileage').klog("Mileage: ");
     }
-    fired{
-      log "HERE" if (true);  
+    always{
+      log "Is a long trip" if (length > long_trip);  
       raise explicit event 'long_trip_found'
         attributes event:attrs()
     }
