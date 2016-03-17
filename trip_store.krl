@@ -17,12 +17,12 @@ Trip store ruleset
     }
 
     long_trips = function() {
-      long_trip = ent:long_trip
+      long_trip = ent:long_trip || {}
       long_trip
     }
 
     short_trips = function() {
-      trip = ent:trip
+      trip = ent:trip.filter(function(k,v){not ent:long_trip.has(k)}) || {}
       trip
     } 
   }
@@ -31,15 +31,13 @@ Trip store ruleset
     select when explicit trip_processed mileage re#(\d+)# setting(length)
     pre {
       timestamp = time:now();
-      map = trips();
-      map2 = map.put([timestamp], length);
-      mapString = map2.encode();
     }
     always {
       log "Trip processed: time=" + timestamp + " mileage=" + length;
       log "Updated trip map: " + mapString;
       set ent:trip{timestamp} length;
-      log "Updated: " + ent:trip.encode();
+      log "Trips updated: " + trips().encode();
+      log "Short trips updated: " + short_trips().encode();
     }
   }
 
@@ -49,7 +47,9 @@ Trip store ruleset
       timestamp = time:now();
     }
     always{
-      log "LONG TRIP PROCESSED: time=" + timestamp + " mileage=" + length;
+      log "Long trip processed: time=" + timestamp + " mileage=" + length;
+      set ent:long_trip{timestamp} length;
+      log "Long trips updated: " + long_trips().encode(); 
     }
   }
 
