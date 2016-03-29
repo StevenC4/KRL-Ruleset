@@ -33,6 +33,7 @@ Ruleset for managing your fleet of vehicles
       raise wrangler event "child_creation"
       attributes attr.klog("attributes: ");
       log("create child for " + child);
+    }
   }
 
   rule delete_vehicle is active {
