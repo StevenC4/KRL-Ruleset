@@ -12,24 +12,22 @@ Ruleset for managing your fleet of vehicles
 
   global {
     vehicles = function(){
-      results = wranglerOS:children();
-      children = results{"children"};
-      children;
-    };
+      ent:subscriptions;
+    }
   }
 
   rule create_vehicle is active {
     select when car new_vehicle
     pre{
       child_name = "Vehicle_" + random:uuid();
+
       attr = {}
         .put(["Prototype_rid"],"b507734x3.prod")
         .put(["name"],child_name)
         .put(["parent_eci"],meta:eci());
     }
     {
-      event:send({"cid":meta:eci()}, "wrangler", "child_creation")  // wrangler os event.
-      with attrs = attributes.klog("attributes: "); // needs a name attribute for child
+      noop();
     }
     always{
       raise wrangler event "child_creation"
@@ -37,16 +35,6 @@ Ruleset for managing your fleet of vehicles
       log("create child for " + child);
     }
   }
-
-  rule delete_vehicle is active {
-    select when car unneeded_vehicle
-    pre{
-      child_name = "Vehicle_" + random:uuid();
-      attr = {}
-        .put(["Prototype_rid"],"b507734x3.prod")
-        .put(["name"],child_name)
-    }
-  }  
 
   rule autoAccept {
     select when wrangler inbound_pending_subscription_added 
