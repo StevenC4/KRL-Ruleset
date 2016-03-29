@@ -23,8 +23,7 @@ Ruleset for managing your fleet of vehicles
 
       attr = {}
         .put(["Prototype_rids"],"b507734x3.prod")
-        .put(["name"],child_name)
-        .put(["parent_eci"],meta:eci());
+        .put(["name"],child_name);
     }
     {
       send_directive("Creating vehicle")
