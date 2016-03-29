@@ -43,7 +43,7 @@ Ruleset for managing your fleet of vehicles
       attributes = event:attrs().klog("subcription :");
     }
     {
-      noop();
+      send_directive("Accepting subscription");
     }
     always{
       raise wrangler event 'pending_subscription_approval'

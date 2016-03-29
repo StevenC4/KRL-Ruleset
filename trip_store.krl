@@ -113,7 +113,8 @@ Trip store ruleset
                       ;
     }
     {
-      send_directive("Requesting subscription");
+      send_directive("Subscribing vehicle to fleet")
+        with parent_eci = parent_eci;
     }
     always {
       raise wrangler event 'subscription'
