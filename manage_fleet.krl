@@ -30,11 +30,16 @@ Ruleset for managing your fleet of vehicles
       send_directive("Creating vehicle") with child_name = child_name;
     }
     always{
+      ent:subscriptions
       log("create child for " + child_name);
     }
   }
 
-  rule auto_accept {
+
+  
+
+
+  rule auto_accept is active {
     select when wrangler inbound_pending_subscription_added 
     pre{
       attributes = event:attrs().klog("subcription :");

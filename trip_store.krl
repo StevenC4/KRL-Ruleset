@@ -97,7 +97,7 @@ Trip store ruleset
   }
 
 
-  rule childToParent {
+  rule childToParent is active {
     select when wrangler init_events
     pre {
        parent_results = wrangler_api:parent();
