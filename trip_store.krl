@@ -36,7 +36,7 @@ Trip store ruleset
       timestamp = time:now();
     }
     if (length > long_trip) then {
-      send_directive("Registering a long trip: " + length);
+      send_directive("Long trip") with length = length
     }
     fired {
       log "Is a long trip: " + length;
