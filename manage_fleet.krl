@@ -13,7 +13,7 @@ Ruleset for managing your fleet of vehicles
 
   global {
     vehicles = function(){
-      results = wranglerOS:children();
+      results = wrangler_api:children();
       children = results{"children"};
       children
     }
