@@ -40,17 +40,6 @@ Ruleset for managing your fleet of vehicles
     }
   }
 
-  rule delete_vehicle is active {
-    select when car unneeded_vehicle
-    pre{
-      childEci = event:attr("eci");
-      childDeletionAttrs = {}.put(["deletionTarget"], childEci).klog("Deletion attributes: ");
-    }
-    {
-      event:send({"cid":meta:eci()}, "wrangler", "child_deletion") with attrs = childDeletionAttrs;
-    }
-  }
-
   rule unsubscribe_vehicle is active {
     select when car unneeded_vehicle
     pre{
@@ -59,6 +48,17 @@ Ruleset for managing your fleet of vehicles
     }
     {
       event:send({"cid":meta:eci()}, "wrangler", "subscription_cancellation") with attrs = childUnsubscriptionAttrs;
+    }
+  }
+
+  rule delete_vehicle is active {
+    select when car unneeded_vehicle
+    pre{
+      childEci = event:attr("eci");
+      childDeletionAttrs = {}.put(["deletionTarget"], childEci).klog("Deletion attributes: ");
+    }
+    {
+      event:send({"cid":meta:eci()}, "wrangler", "child_deletion") with attrs = childDeletionAttrs;
     }
   }
 
