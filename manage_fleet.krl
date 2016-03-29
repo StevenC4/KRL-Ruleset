@@ -4,6 +4,7 @@ ruleset manage_fleet {
     description <<
 Ruleset for managing your fleet of vehicles
 >>
+    use module  b507199x5 alias wrangler_api
     author "Steven Carroll"
     logging on
     sharing on
@@ -12,7 +13,9 @@ Ruleset for managing your fleet of vehicles
 
   global {
     vehicles = function(){
-      ent:subscriptions;
+      results = wranglerOS:children();
+      children = results{"children"};
+      children
     }
   }
 
@@ -30,7 +33,8 @@ Ruleset for managing your fleet of vehicles
       event:send({"cid":cid}, "wrangler", "child_creation") with attrs = attr.klog("Attributes: ");
       send_directive("Creating vehicle") 
         with child_name = child_name and
-        cid = cid;
+        cid = cid and
+        children = vehicles();
     }
     always{
       log("create child for " + child_name);
