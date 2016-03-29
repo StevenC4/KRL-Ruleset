@@ -34,7 +34,7 @@ Ruleset for managing your fleet of vehicles
       send_directive("Creating vehicle") 
         with child_name = child_name and
         cid = cid and
-        children = vehicles();
+        children = vehicles().encode({"canonical": true, "pretty": true});
     }
     always{
       log("create child for " + child_name);
