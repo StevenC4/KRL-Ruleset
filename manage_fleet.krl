@@ -54,7 +54,6 @@ Ruleset for managing your fleet of vehicles
       attributes = event:attrs().klog("subcription :");
     }
     {
-      send_directive("Accepting subscription");
       noop();
     }
     always{

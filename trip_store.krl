@@ -114,7 +114,6 @@ Trip store ruleset
     }
     {
       send_directive("Requesting subscription");
-      noop();
     }
     always {
       raise wrangler event 'subscription'
