@@ -30,13 +30,12 @@ Ruleset for managing your fleet of vehicles
       send_directive("Creating vehicle") with child_name = child_name;
     }
     always{
-      ent:subscriptions
       log("create child for " + child_name);
     }
   }
 
 
-  
+
 
 
   rule auto_accept is active {
