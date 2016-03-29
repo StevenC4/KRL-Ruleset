@@ -25,7 +25,7 @@ Ruleset for managing your fleet of vehicles
       attr = {}
         .put(["Prototype_rid"],"b507734x3.prod")
         .put(["name"],child_name)
-        .put(["parent_eci"],meta:eci())
+        .put(["parent_eci"],meta:eci());
     }
     {
       noop();
