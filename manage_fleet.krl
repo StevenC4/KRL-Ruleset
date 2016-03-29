@@ -51,6 +51,8 @@ Ruleset for managing your fleet of vehicles
     }
     {
       event:send({"cid":meta:eci()}, "wrangler", "subscription_cancellation") with attrs = childUnsubscriptionAttrs;
+    }
+    always{
       event:send({"cid":meta:eci()}, "wrangler", "child_deletion") with attrs = childDeletionAttrs;
     }
   }
