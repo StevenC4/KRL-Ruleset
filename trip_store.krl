@@ -12,6 +12,8 @@ Trip store ruleset
   }
   
   global{
+    long_trip = 50;
+
     trips = function() {
       trip = ent:trip || {}
       trip
@@ -33,10 +35,16 @@ Trip store ruleset
     pre {
       timestamp = time:now();
     }
-    {
-      send_directive("trip") with
-        trips = map.encode({"canonical": true, "pretty": true})
-        and short_trips = shortMap.encode({"canonical": true, "pretty": true});
+    if (length > long_trip) then {
+      send_directive("Registering a long trip: " + length);
+    }
+    fired {
+      log "Is a long trip: " + length;
+      raise explicit event 'found_long_trip'
+        attributes event:attrs() if (length > long_trip);
+    }
+    else {
+      log "Is a short trip: " + length;
     }
     always {
       log "Trip processed: time=" + timestamp + " mileage=" + length;
