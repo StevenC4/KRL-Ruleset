@@ -32,6 +32,8 @@ Ruleset for managing your fleet of vehicles
       with attrs = attributes.klog("attributes: "); // needs a name attribute for child
     }
     always{
+      raise wrangler event "child_creation"
+      attributes attr.klog("attributes: ");
       log("create child for " + child);
     }
   }
