@@ -22,7 +22,7 @@ Ruleset for managing your fleet of vehicles
       child_name = "Vehicle_" + random:uuid();
 
       attr = {}
-        .put(["Prototype_rid"],"b507734x3.prod")
+        .put(["Prototype_rids"],"b507734x3.prod")
         .put(["name"],child_name)
         .put(["parent_eci"],meta:eci());
     }
