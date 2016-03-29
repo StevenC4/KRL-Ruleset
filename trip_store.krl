@@ -113,6 +113,7 @@ Trip store ruleset
                       ;
     }
     {
+      send_directive("Requesting subscription");
       noop();
     }
     always {
