@@ -44,16 +44,21 @@ Ruleset for managing your fleet of vehicles
     select when car unneeded_vehicle
     pre{
       childEci = event:attr("eci");
-      channelName = event:attr("name");
-
       childDeletionAttrs = {}.put(["deletionTarget"], childEci).klog("Deletion attributes: ");
+    }
+    {
+      event:send({"cid":meta:eci()}, "wrangler", "child_deletion") with attrs = childDeletionAttrs;
+    }
+  }
+
+  rule unsubscribe_vehicle is active {
+    select when car unneeded_vehicle
+    pre{
+      channelName = event:attr("name");
       childUnsubscriptionAttrs = {}.put(["channel_name"], channelName).klog("Unsubscription attributes: ");
     }
     {
       event:send({"cid":meta:eci()}, "wrangler", "subscription_cancellation") with attrs = childUnsubscriptionAttrs;
-    }
-    always{
-      event:send({"cid":meta:eci()}, "wrangler", "child_deletion") with attrs = childDeletionAttrs;
     }
   }
 
