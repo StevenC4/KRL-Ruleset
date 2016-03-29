@@ -42,11 +42,11 @@ Trip store ruleset
       log "Is a long trip: " + length;
       raise explicit event 'found_long_trip'
         attributes event:attrs() if (length > long_trip);
+      log "Trip processed: time=" + timestamp + " mileage=" + length;
+      set ent:trip{timestamp} length;
     }
     else {
       log "Is a short trip: " + length;
-    }
-    always {
       log "Trip processed: time=" + timestamp + " mileage=" + length;
       set ent:trip{timestamp} length;
     }
