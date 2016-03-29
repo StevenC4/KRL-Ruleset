@@ -15,7 +15,7 @@ Ruleset for managing your fleet of vehicles
     vehicles = function(){
       results = wrangler_api:children();
       children = results{"children"};
-      children
+      children;
     }
   }
 
