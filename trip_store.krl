@@ -104,7 +104,6 @@ Trip store ruleset
     }
   }
 
-
   rule childToParent is active {
     select when wrangler init_events
     pre {

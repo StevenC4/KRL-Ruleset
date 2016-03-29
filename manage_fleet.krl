@@ -41,6 +41,20 @@ Ruleset for managing your fleet of vehicles
     }
   }
 
+  rule delete_vehicle is active {
+    select when car unneeded_vehicle
+    pre{
+      childEci = event:attr("eci");
+      vehicleName = event:attr("name");
+
+      childDeletionAttrs = {}.put(["deletionTarget"], childEci).klog("Deletion attributes: ");
+      childUnsubscriptionAttrs = {}.put(["channel_name"], vehicleName).klog("Unsubscription attributes: ");
+    }
+    {
+      event:send({"cid":meta:eci()}, "wrangler", "child_deletion") with attrs = childDeletionAttrs;
+      event:send({"cid":meta:eci()}, "wrangler", "subscription_cancellation") with attrs = childUnsubscriptionAttrs;
+    }
+  }
 
   rule fetch_children is active {
     select when fleet fetch_vehicles
