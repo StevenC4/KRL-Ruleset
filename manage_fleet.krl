@@ -26,18 +26,15 @@ Ruleset for managing your fleet of vehicles
         .put(["name"],child_name);
     }
     {
-      event:send({"cid":meta:eci()}, "wrangler", "child_creation")
-        with attrs = attr.klog("Attributes: ");
-      send_directive("Creating vehicle")
-        with child_name = child_name;
+      event:send({"cid":meta:eci()}, "wrangler", "child_creation") with attrs = attr.klog("Attributes: ");
+      send_directive("Creating vehicle") with child_name = child_name;
     }
     always{
-      
       log("create child for " + child_name);
     }
   }
 
-  rule autoAccept {
+  rule auto_accept {
     select when wrangler inbound_pending_subscription_added 
     pre{
       attributes = event:attrs().klog("subcription :");
