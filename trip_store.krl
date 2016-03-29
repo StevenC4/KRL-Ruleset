@@ -7,6 +7,7 @@ Trip store ruleset
     author "Steven Carroll"
     logging on
     sharing on
+    use module  b507199x5 alias wrangler_api
     provides trips, long_trips, short_trips
   }
   
@@ -92,6 +93,31 @@ Trip store ruleset
     {
       send_directive("trip") with
         trips = map.encode({"canonical": true, "pretty": true})
+    }
+  }
+
+
+  rule childToParent {
+    select when wrangler init_events
+    pre {
+       parent_results = wrangler_api:parent();
+       parent = parent_results{'parent'};
+       parent_eci = parent[0]; // eci is the first element in tuple 
+       attrs = {}.put(["name"],"Family")
+                      .put(["name_space"],"MultiplePicosLab")
+                      .put(["my_role"],"Vehicle")
+                      .put(["your_role"],"Fleet")
+                      .put(["target_eci"],parent_eci.klog("target Eci: "))
+                      .put(["channel_type"],"Fleet_Vehicle")
+                      .put(["attrs"],"success")
+                      ;
+    }
+    {
+      noop();
+    }
+    always {
+      raise wrangler event "subscription"
+      attributes attrs;
     }
   }   
 }
