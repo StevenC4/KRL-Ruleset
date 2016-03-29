@@ -42,7 +42,16 @@ Ruleset for managing your fleet of vehicles
   }
 
 
-
+  rule fetch_children is active {
+    select when fleet fetch_vehicles
+    pre{
+      children = vehicles().klog("Children: ");
+    }
+    {
+      send_directive("Children: ")
+        with children = children;
+    }
+  }
 
 
   rule auto_accept is active {
