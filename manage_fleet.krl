@@ -27,12 +27,13 @@ Ruleset for managing your fleet of vehicles
         .put(["parent_eci"],meta:eci());
     }
     {
+
+      event:send({"cid":meta:eci()}, "wrangler", "child_creation")  // wrangler os event.
+      with attrs = attributes.klog("attributes: "); // needs a name attribute for child
       send_directive("Creating vehicle")
         with child_name = child_name;
     }
     always{
-      raise wrangler event "child_creation"
-        attributes attr.klog("attributes: ");
       log("create child for " + child_name);
     }
   }
