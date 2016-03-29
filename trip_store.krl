@@ -5,9 +5,9 @@ ruleset trip_store {
 Trip store ruleset
 >>
     author "Steven Carroll"
+    use module  b507199x5 alias wrangler_api
     logging on
     sharing on
-    use module  b507199x5 alias wrangler_api
     provides trips, long_trips, short_trips
   }
   
@@ -103,8 +103,8 @@ Trip store ruleset
        parent_results = wrangler_api:parent();
        parent = parent_results{'parent'};
        parent_eci = parent[0]; // eci is the first element in tuple 
-       attrs = {}.put(["name"],"Family")
-                      .put(["name_space"],"MultiplePicosLab")
+       attrs = {}.put(["name"],event:attr("name"))
+                      .put(["name_space"],"Fleet_Vehicle")
                       .put(["my_role"],"Vehicle")
                       .put(["your_role"],"Fleet")
                       .put(["target_eci"],parent_eci.klog("target Eci: "))

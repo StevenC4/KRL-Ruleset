@@ -51,7 +51,7 @@ Ruleset for managing your fleet of vehicles
     select when wrangler inbound_pending_subscription_added 
     pre{
       attributes = event:attrs().klog("subcription :");
-      }
+    }
     {
       noop();
     }
