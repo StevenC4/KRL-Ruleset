@@ -13,9 +13,9 @@ Ruleset for managing your fleet of vehicles
 
   global {
     vehicles = function(){
-      results = wrangler_api:children() || {};
-      children = results{"children"} || {};
-      children || {};
+      results = wrangler_api:children();
+      children = results{"children"};
+      children;
     }
   }
 
