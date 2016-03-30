@@ -88,7 +88,7 @@ Ruleset for managing your fleet of vehicles
     select when explicit foreach_loop
       foreach children setting(child)
         {
-          send_directive("Child gotten") with child = child;
+          send_directive("Child gotten") with child = child.klog("Child");
         }
   }
 
