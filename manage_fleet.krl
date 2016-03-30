@@ -86,9 +86,12 @@ Ruleset for managing your fleet of vehicles
 
   rule foreach_child_trips is active {
     select when explicit foreach_loop
-      foreach children setting(child)
+      foreach vehicles() setting(child)
+        pre{
+          childEci = child[0].klog("Child eci: ");
+        }
         {
-          send_directive("Child gotten") with child = child.klog("Child");
+          send_directive("Child gotten") with child = child.klog("Child: ");
         }
   }
 
