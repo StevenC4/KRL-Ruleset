@@ -49,6 +49,7 @@ Trip store ruleset
       log "Is a short trip: " + length;
       log "Trip processed: time=" + timestamp + " mileage=" + length;
       set ent:trip{timestamp} length;
+      send_directive("Short trip") with length = length
     }
   }
 
