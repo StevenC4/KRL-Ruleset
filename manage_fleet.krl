@@ -80,7 +80,7 @@ Ruleset for managing your fleet of vehicles
       attrs = {}.put(["children"],children);
     }
     always{
-      raise explicit event 'foreach_loop' attributes attrs;
+      raise explicit event 'foreach_loop' attributes attrs.klog("Attributes: ");
     }
   }
 
