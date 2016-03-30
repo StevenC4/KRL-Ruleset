@@ -46,7 +46,6 @@ Trip store ruleset
       set ent:trip{timestamp} length;
     }
     else {
-      send_directive("Trip processed") with length = length
       log "Is a short trip: " + length;
       log "Trip processed: time=" + timestamp + " mileage=" + length;
       set ent:trip{timestamp} length;
