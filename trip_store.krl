@@ -117,6 +117,7 @@ Trip store ruleset
                       .put(["target_eci"],parent_eci.klog("target Eci: "))
                       .put(["channel_type"],"Fleet_Vehicle")
                       .put(["attrs"],"success")
+                      .put(["channel_name"],event:attr("name"))
                       ;
     }
     {
