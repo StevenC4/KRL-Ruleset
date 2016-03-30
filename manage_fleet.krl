@@ -61,8 +61,7 @@ Ruleset for managing your fleet of vehicles
     {
       event:send({"cid":cid}, "wrangler", "child_creation") with attrs = attr.klog("Attributes: ");
       send_directive("Creating vehicle") 
-        with child_name = child_name and
-        cid = cid;
+        with child_name = child_name;
     }
     always{
       log("create child for " + child_name);
