@@ -110,7 +110,7 @@ Ruleset for managing your fleet of vehicles
           trips = cloud(childEci,'b507734x3.prod','trips');
         }
         {
-          send_directive("Called trips()") with trips = trips;
+          send_directive("Called trips()") with trips = trips and eci = childEci;
         }
   }
 
