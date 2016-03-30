@@ -73,6 +73,24 @@ Ruleset for managing your fleet of vehicles
     }
   }
 
+  rule call_trips_function is active {
+    select when explicit get_trips
+    pre{
+      children = vehicles();
+      attrs = {}.put(["children"],children);
+    }
+    always{
+      raise explicit event 'foreach_loop' attributes attrs;
+    }
+  }
+
+  rule foreach_child_trips is active {
+    select when explicit foreach_loop
+      foreach children setting(child)
+        {
+          send_directive("Child gotten") with child = child;
+        }
+  }
 
   rule auto_accept is active {
     select when wrangler inbound_pending_subscription_added 
