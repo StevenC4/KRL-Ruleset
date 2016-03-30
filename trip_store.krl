@@ -120,16 +120,11 @@ Trip store ruleset
                       ;
     }
     {
-      send_directive("Subscribing vehicle to fleet")
-        with parent_eci = parent_eci;
+      noop();
     }
     always {
-      raise cloudos event subscribe
-        with channelName   = event:attr("name")
-        and  namespace     = "Fleet_Vehicle"
-        and  relationship  = "Fleet-Vehicle"
-        and  targetChannel = parent_eci
-        and  _api = "sky";
+      raise wrangler event 'subscription'
+        attributes attrs;
     }
   }   
 }
