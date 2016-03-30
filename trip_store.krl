@@ -125,8 +125,8 @@ Trip store ruleset
         with parent_eci = parent_eci;
     }
     always {
-      raise wrangler event 'subscription'
-        attributes attrs;
+    event:send({"cid": meta:eci()}, "wrangler", "channel_creation_requested")  
+        with attrs = attr.klog("attributes: ");
     }
-  }   
+  }  
 }
