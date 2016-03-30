@@ -128,4 +128,22 @@ Ruleset for managing your fleet of vehicles
           log("auto accepted subcription.");
     }
   }
+
+  rule request_report is active {
+    select when fleet request_report
+    foreach vehicles() setting(child)
+      pre{
+        childEci = child[0].klog("Child eci: ");
+      }
+      {
+        event:send({"cid":childEci}, "car", "send_report"); 
+      }
+  }
+
+  rule is active {
+    select when fleet collect_trip
+    {
+      log("Collecting trips");
+    }
+  }
 }

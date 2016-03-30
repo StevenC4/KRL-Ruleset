@@ -126,5 +126,17 @@ Trip store ruleset
       raise wrangler event 'subscription'
         attributes attrs;
     }
-  }   
+  }
+
+  rule send_report_to_parent is active {
+    select when car send_report   
+    pre{
+      parent_results = wrangler_api:parent();
+      parent = parent_results{'parent'};
+      parent_eci = parent[0].klog("Parent eci");
+    }
+    {
+      event:send({"eci": parentEci}, "fleet", "collect_report");
+    }
+  }
 }
