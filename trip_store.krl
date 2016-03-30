@@ -7,8 +7,8 @@ Trip store ruleset
     author "Steven Carroll"
     use module  b507199x5 alias wrangler_api
     logging on
-    sharing on
     provides trips, long_trips, short_trips
+    sharing on
   }
   
   global{
