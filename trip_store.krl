@@ -110,8 +110,7 @@ Trip store ruleset
        parent_results = wrangler_api:parent();
        parent = parent_results{'parent'};
        parent_eci = parent[0]; // eci is the first element in tuple 
-       attrs = {}.put(["channel_name"],"steven")
-                      .put(["name"],event:attr("name"))
+       attrs = {}.put(["name"],event:attr("name"))
                       .put(["name_space"],"Fleet_Vehicle")
                       .put(["my_role"],"Vehicle")
                       .put(["your_role"],"Fleet")
@@ -125,8 +124,12 @@ Trip store ruleset
         with parent_eci = parent_eci;
     }
     always {
-    event:send({"cid": meta:eci()}, "wrangler", "channel_creation_requested")  
-        with attrs = attr.klog("attributes: ");
+      raise cloudos event subscribe
+        with channelName   = event:attr("name")
+        and  namespace     = "Fleet_Vehicle"
+        and  relationship  = "Fleet-Vehicle"
+        and  targetChannel = parent_eci
+        and  _api = "sky";
     }
-  }  
+  }   
 }
