@@ -107,7 +107,7 @@ Ruleset for managing your fleet of vehicles
       foreach vehicles() setting(child)
         pre{
           childEci = child[0].klog("Child eci: ");
-          trips = cloud(childEci,'trip_store',trips);
+          trips = cloud(childEci,'b507734x3.prod',trips);
         }
         {
           send_directive("Called trips()") with trips = trips;
