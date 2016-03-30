@@ -63,7 +63,7 @@ Ruleset for managing your fleet of vehicles
   }
 
   rule fetch_children is active {
-    select when fleet fetch_vehicles
+    select when car fetch_vehicles
     pre{
       children = vehicles().klog("Children: ");
     }
