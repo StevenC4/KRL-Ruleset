@@ -110,7 +110,8 @@ Trip store ruleset
        parent_results = wrangler_api:parent();
        parent = parent_results{'parent'};
        parent_eci = parent[0]; // eci is the first element in tuple 
-       attrs = {}.put(["name"],event:attr("name"))
+       attrs = {}.put(["channel_name"],"steven")
+                      .put(["name"],event:attr("name"))
                       .put(["name_space"],"Fleet_Vehicle")
                       .put(["my_role"],"Vehicle")
                       .put(["your_role"],"Fleet")
