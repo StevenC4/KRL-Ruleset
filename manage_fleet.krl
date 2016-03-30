@@ -140,7 +140,7 @@ Ruleset for managing your fleet of vehicles
       }
   }
 
-  rule is active {
+  rule collect_trip_reports is active {
     select when fleet collect_trip
     {
       log("Collecting trips");
