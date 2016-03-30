@@ -75,23 +75,15 @@ Ruleset for managing your fleet of vehicles
 
   rule call_trips_function is active {
     select when explicit get_trips
-    pre{
-      children = vehicles();
-      attrs = {}.put(["children"],children);
-    }
-    always{
-      raise explicit event 'foreach_loop' attributes attrs.klog("Attributes: ");
-    }
-  }
-
-  rule foreach_child_trips is active {
-    select when explicit foreach_loop
       foreach vehicles() setting(child)
         pre{
           childEci = child[0].klog("Child eci: ");
         }
         {
-          send_directive("Child gotten") with child = child.klog("Child: ");
+          send_directive("Child gotten") with child = childEci.klog("ChildEci: ");
+        }
+        always{
+          raise explicit event 'foreach_loop' attributes attrs.klog("Attributes: ");
         }
   }
 
